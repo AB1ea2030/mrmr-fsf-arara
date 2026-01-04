@@ -33,6 +33,54 @@ def cleanup_old_files(folder, max_age_hours=6):
                 pass
 
 
+# ================== yt-dlp مع Retry ذكي ==================
+def download_audio_with_retry(url, output_template):
+    formats = [
+        "bestaudio",
+        "bestaudio/best",
+        "best"
+    ]
+
+    for fmt in formats:
+        try:
+            subprocess.run(
+                [
+                    "yt-dlp",
+
+                    # تقليل الاشتباه
+                    "--user-agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/120.0.0.0 Safari/537.36",
+
+                    "--referer", "https://www.youtube.com/",
+                    "--no-check-certificate",
+
+                    # سلوك بشري
+                    "--sleep-interval", "1",
+                    "--max-sleep-interval", "3",
+
+                    # إعادة المحاولة
+                    "--retries", "5",
+                    "--fragment-retries", "5",
+
+                    # الصيغة
+                    "-f", fmt,
+
+                    # الإخراج
+                    "-o", output_template,
+
+                    url
+                ],
+                check=True
+            )
+            return True
+        except subprocess.CalledProcessError:
+            time.sleep(2)  # انتظار قبل المحاولة التالية
+
+    return False
+
+
 # ================== الصفحة الرئيسية ==================
 @app.route("/", methods=["GET"])
 def index():
@@ -51,21 +99,18 @@ def process():
     url = url.split("&")[0]
 
     uid = str(uuid.uuid4())
-    audio_path = os.path.join(UPLOADS, f"{uid}.%(ext)s")
+    audio_path_template = os.path.join(UPLOADS, f"{uid}.%(ext)s")
 
-    # تنزيل الصوت بأعلى جودة
-    subprocess.run(
-        [
-            "yt-dlp",
-            "--no-warnings",
-            "-f", "bestaudio",
-            "-o", audio_path,
-            url
-        ],
-        check=True
-    )
+    success = download_audio_with_retry(url, audio_path_template)
 
-    # إيجاد الملف الناتج (ext غير معروف مسبقًا)
+    if not success:
+        return (
+            "⚠️ تعذر تحميل هذا الفيديو. "
+            "قد يكون محميًا ويتطلب تسجيل دخول يوتيوب.",
+            500
+        )
+
+    # إيجاد الملف الناتج
     downloaded_file = None
     for f in os.listdir(UPLOADS):
         if f.startswith(uid):
