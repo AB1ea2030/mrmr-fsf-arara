@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>MyWebAI</title>
 
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -14,20 +13,16 @@
 
 <div class="container">
     <h2>🎧 عالم المحور</h2>
-    <p class="subtitle">ما يحتاج اشرح الفكرة سهلة</p>
+    <p class="subtitle">ما يحتاج أشرح الفكرة… سهلة</p>
 
     <form method="post" action="/process">
         <label>رابط يوتيوب:</label>
-        <input type="text" name="url" placeholder="https://youtube.com/...">
+        <input type="text" name="url" placeholder="https://youtube.com/..." required>
 
-        <label>الوضع:</label>
-        <select name="mode">
-            <option value="text">نص فقط</option>
-            <option value="audio">صوت فقط</option>
-            <option value="both">نص + صوت</option>
-        </select>
+        <!-- صوت فقط -->
+        <input type="hidden" name="mode" value="audio">
 
-        <button type="submit">تحويل</button>
+        <button type="submit">تحميل الصوت</button>
     </form>
 
     <div class="loading">
