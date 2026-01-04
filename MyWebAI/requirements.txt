@@ -5,3 +5,4 @@ openai-whisper
 ffmpeg-python
 fpdf
 torch
+gunicorn
