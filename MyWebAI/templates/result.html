@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>MyWebAI - النتائج</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📊 النتائج</h2>
+
+    {% if text %}
+    <div class="result">
+        <h3 class="section-title">📄 النص المستخرج</h3>
+        <pre>{{ text }}</pre>
+    </div>
+    {% endif %}
+
+    {% if audio_file %}
+    <div class="result">
+        <h3 class="section-title">🔊 الصوت</h3>
+        <audio controls style="width:100%; margin-top:10px;">
+            <source src="{{ audio_file }}">
+        </audio>
+    </div>
+    {% endif %}
+
+    {% if pdf_file %}
+    <div class="result">
+        <h3 class="section-title">⬇️ ملف PDF</h3>
+        <a href="{{ pdf_file }}">تحميل PDF</a>
+    </div>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">⬅️ الرجوع للصفحة الرئيسية</a>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
