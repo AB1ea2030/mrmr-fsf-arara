@@ -1,0 +1,7 @@
+Flask
+yt-dlp
+pydub
+openai-whisper
+ffmpeg-python
+fpdf
+torch

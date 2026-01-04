@@ -1,0 +1,199 @@
+/* ================== Base ================== */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  direction: rtl;
+
+  background: linear-gradient(
+    135deg,
+    #bfa2db 0%,
+    #d8c6ea 45%,
+    #f5f2ec 100%
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b3a63;
+}
+
+/* ================== Card ================== */
+.container {
+  max-width: 850px;
+  width: 100%;
+  background: #f5f2ec;
+  padding: 34px;
+  border-radius: 20px;
+
+  box-shadow:
+    0 25px 50px rgba(191, 162, 219, 0.45),
+    inset 0 0 0 1px rgba(191, 162, 219, 0.25);
+}
+
+/* ================== Headings ================== */
+h2 {
+  text-align: center;
+  margin-top: 0;
+  color: #6a4c8c;
+  letter-spacing: 0.6px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #7b6794;
+  margin-bottom: 30px;
+}
+
+/* ================== Form ================== */
+form label {
+  font-weight: bold;
+  margin-top: 14px;
+  display: block;
+  color: #6a4c8c;
+}
+
+/* Inputs & Select */
+input[type="file"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  border-radius: 14px;
+  border: 1px solid #bfa2db;
+  background: #ffffff;
+  color: #4b3a63;
+  transition: 0.25s ease;
+  font-size: 15px;
+}
+
+input::placeholder {
+  color: #9a84b8;
+}
+
+input:focus,
+select:focus {
+  border-color: #bfa2db;
+  box-shadow: 0 0 0 3px rgba(191, 162, 219, 0.35);
+  outline: none;
+}
+
+/* OR separator */
+.or {
+  display: block;
+  text-align: center;
+  margin: 20px 0;
+  color: #8d78aa;
+}
+
+/* ================== Button ================== */
+button {
+  width: 100%;
+  margin-top: 26px;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #bfa2db,
+    #a88bc8
+  );
+
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #bfa2db;
+  box-shadow: 0 12px 28px rgba(191, 162, 219, 0.6);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ================== Loading ================== */
+.loading {
+  display: none;
+  text-align: center;
+  margin-top: 22px;
+  color: #6a4c8c;
+  font-weight: bold;
+}
+
+/* ================== Result ================== */
+.result {
+  margin-top: 30px;
+}
+
+pre {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 16px;
+  white-space: pre-wrap;
+  line-height: 1.9;
+  color: #4b3a63;
+  border: 1px solid rgba(191, 162, 219, 0.35);
+}
+
+/* Links */
+a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #6a4c8c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ================== Mobile ================== */
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 16px;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+  }
+  @media (hover: none) {
+  button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
